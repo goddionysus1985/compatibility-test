@@ -1,4 +1,5 @@
 :root {
+    /* Midnight (Default) */
     --bg-dark: #070b14;
     --card-bg: rgba(30, 41, 59, 0.4);
     --accent: #10b981;
@@ -8,6 +9,28 @@
     --text-secondary: #94a3b8;
     --border: rgba(255, 255, 255, 0.1);
     --font-main: 'Outfit', sans-serif;
+}
+
+body.theme-slate {
+    --bg-dark: #1e293b;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --remaining: #475569;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body.theme-vibrant {
+    --bg-dark: #11051e;
+    --card-bg: rgba(255, 255, 255, 0.07);
+    --accent: #f43f5e;
+    --accent-glow: rgba(244, 63, 94, 0.3);
+    --remaining: #312e81;
+    --text-primary: #fff1f2;
+    --text-secondary: #fda4af;
+    --border: rgba(255, 255, 255, 0.15);
 }
 
 * {
@@ -26,6 +49,7 @@ body {
     align-items: flex-start;
     padding: 2rem 0;
     overflow-x: hidden;
+    transition: background-color 0.5s ease;
 }
 
 .background-blobs {
@@ -43,17 +67,20 @@ body {
     width: 40vw;
     height: 40vw;
     border-radius: 50%;
+    transition: all 0.5s ease;
 }
 
 .blob-1 {
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    opacity: 0.15;
     top: -10%;
     right: -10%;
     animation: move-1 20s infinite alternate;
 }
 
 .blob-2 {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+    opacity: 0.1;
     bottom: -10%;
     left: -10%;
     animation: move-2 25s infinite alternate;
@@ -67,6 +94,46 @@ body {
 @keyframes move-2 {
     from { transform: translate(0, 0); }
     to { transform: translate(20%, -20%); }
+}
+
+.theme-switcher {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    padding: 0.5rem;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    z-index: 100;
+}
+
+.theme-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.theme-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-btn.active {
+    opacity: 1;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
 }
 
 .container {
@@ -87,6 +154,7 @@ body {
     padding: 2rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     width: 100%;
+    transition: background-color 0.5s ease;
 }
 
 h1 {
@@ -99,6 +167,7 @@ h1 {
 .accent {
     color: var(--accent);
     text-shadow: 0 0 20px var(--accent-glow);
+    transition: color 0.5s ease;
 }
 
 .subtitle {
@@ -277,7 +346,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 10%;
     display: flex;
     justify-content: center;
-    transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease;
     position: relative;
     overflow: hidden;
 }
@@ -290,7 +359,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 0.8rem !important;
     font-weight: 800 !important;
     white-space: nowrap !important;
-    color: #070b14 !important;
+    color: #0d1117 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
     z-index: 10 !important;
@@ -325,7 +394,7 @@ input[type="range"]::-webkit-slider-thumb {
     right: -30px;
     bottom: 0px; 
     background: var(--accent);
-    color: var(--bg-dark);
+    color: #0d1117;
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -334,5 +403,5 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translateY(50%);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 5;
-    transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease;
 }

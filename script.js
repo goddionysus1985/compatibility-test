@@ -17,6 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const indMan = document.getElementById('ind-man');
     const indWoman = document.getElementById('ind-woman');
 
+    // Theme Switcher
+    const themeBtns = document.querySelectorAll('.theme-btn');
+    let currentTheme = localStorage.getItem('theme') || 'midnight';
+
+    function setTheme(theme) {
+        document.body.className = `theme-${theme}`;
+        themeBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === theme);
+        });
+        localStorage.setItem('theme', theme);
+        updateBars(); // Refresh colors
+    }
+
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => setTheme(btn.dataset.theme));
+    });
+
+    // Initialize Theme
+    setTheme(currentTheme);
+
     function updateBars() {
         const percentage = compatibilityInput.value;
         const manName = manNameInput.value || 'Man';
@@ -24,8 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const womanName = womanNameInput.value || 'Woman';
         const womanAge = womanAgeInput.value || '0';
 
-        // Calculate Color (Red 0 to Green 120)
-        const hue = Math.floor((percentage / 100) * 120);
+        // Calculate dynamic color (Red to Green/Accent)
+        // Use a mix of Red (0) and the Theme's Accent color
+        const themeAccent = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+        const themeHue = themeAccent.startsWith('hsl') ? parseInt(themeAccent.match(/\d+/)[0]) : 120; // Default to 120 (Green)
+        
+        // Custom logic for Slate theme (Indigo)
+        let hueStart = 0; // Red
+        let hueEnd = 120; // Green default
+        
+        if (document.body.classList.contains('theme-slate')) { hueEnd = 240; } // Indigo
+        if (document.body.classList.contains('theme-vibrant')) { hueEnd = 340; } // Rose
+
+        const hue = Math.floor((percentage / 100) * (hueEnd - hueStart) + hueStart);
         const color = `hsl(${hue}, 80%, 45%)`;
         const colorGlow = `hsl(${hue}, 80%, 45%, 0.4)`;
 
