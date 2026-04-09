@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibility Tester | Premium Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <section class="config-card">
+            <h1>Compatibility <span class="accent">Tester</span></h1>
+            <p class="subtitle">Analyze the connection between two individuals.</p>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="man-name">Man's Name</label>
+                    <input type="text" id="man-name" placeholder="e.g. Mike" value="Mike">
+                </div>
+                <div class="input-group">
+                    <label for="man-age">Man's Age</label>
+                    <input type="number" id="man-age" placeholder="63" value="63">
+                </div>
+                <div class="input-group">
+                    <label for="woman-name">Woman's Name</label>
+                    <input type="text" id="woman-name" placeholder="e.g. Inna" value="Inna">
+                </div>
+                <div class="input-group">
+                    <label for="woman-age">Woman's Age</label>
+                    <input type="number" id="woman-age" placeholder="35" value="35">
+                </div>
+                <div class="input-group full-width">
+                    <label for="compatibility-pct">Compatibility Percentage</label>
+                    <input type="range" id="compatibility-pct" min="0" max="100" value="10">
+                    <span id="pct-display">10%</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-container">
+            <div class="chart-wrapper">
+                <div class="y-axis">
+                    <span>100</span>
+                    <span>80</span>
+                    <span>60</span>
+                    <span>40</span>
+                    <span>20</span>
+                    <span>0</span>
+                </div>
+                <div class="chart-area">
+                    <div class="grid-lines">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="bars">
+                        <div class="bar-container">
+                            <div class="pct-indicator" id="ind-man">10%</div>
+                            <div class="bar" id="bar-man">
+                                <div class="remaining"></div>
+                                <div class="compatibility">
+                                    <span id="label-man">Mike, 63</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="pct-indicator" id="ind-woman">10%</div>
+                            <div class="bar" id="bar-woman">
+                                <div class="remaining"></div>
+                                <div class="compatibility">
+                                    <span id="label-woman">Inna, 35</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="dot compatibility-dot"></span>
+                    <span>Compatibility</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot remaining-dot"></span>
+                    <span>Remaining</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
