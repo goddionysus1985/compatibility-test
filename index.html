@@ -56,6 +56,11 @@
                     <input type="range" id="compatibility-pct" min="0" max="100" value="0">
                     <span id="pct-display">0%</span>
                 </div>
+                <div class="input-group full-width action-group" style="margin-top: 1rem; align-items: center;">
+                    <button type="button" id="btn-open-collage" class="collage-trigger-btn">
+                        <span>💖 Create Heart Collage</span>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -113,6 +118,142 @@
             </div>
         </section>
     </main>
+
+    <!-- SVG Clip Path Definition -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <clipPath id="heart-clip" clipPathUnits="objectBoundingBox">
+                <path d="M0.5,0.9 C0.438,0.84 0.23,0.647 0.1,0.5 C0.015,0.38 0,0.298 0,0.19 C0,0.086 0.084,0 0.188,0 C0.246,0 0.301,0.027 0.338,0.07 C0.406,0.127 0.462,0.19 0.5,0.22 C0.538,0.19 0.594,0.127 0.662,0.07 C0.699,0.027 0.754,0 0.812,0 C0.916,0 1,0.086 1,0.19 C1,0.298 0.985,0.38 0.9,0.5 C0.77,0.647 0.562,0.84 0.5,0.9 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <!-- Fullscreen Collage Overlay -->
+    <div id="collage-overlay" class="collage-overlay" style="display: none;">
+        
+        <div class="overlay-header">
+            <button id="btn-close-collage" class="close-btn" title="Go Back">✕</button>
+        </div>
+
+        <div class="collage-workspace">
+            <!-- Left Panel: Customizer Controls -->
+            <section class="controls-panel card-glass">
+                <h2>Customize Collage</h2>
+                <p class="panel-desc">Fine-tune the display. Click directly on the heart shapes in the canvas to upload custom photos.</p>
+                
+
+
+                <div class="control-group">
+                    <label for="collage-compatibility-pct">Compatibility Percentage</label>
+                    <input type="range" id="collage-compatibility-pct" min="0" max="100" value="0">
+                </div>
+
+                <div class="control-group">
+                    <label>Collage Glow Theme</label>
+                    <div class="glow-selector">
+                        <button class="glow-btn active" data-color="rose" style="--color-preview: #f43f5e;"></button>
+                        <button class="glow-btn" data-color="amethyst" style="--color-preview: #a855f7;"></button>
+                        <button class="glow-btn" data-color="emerald" style="--color-preview: #10b981;"></button>
+                        <button class="glow-btn" data-color="sapphire" style="--color-preview: #3b82f6;"></button>
+                    </div>
+                </div>
+
+                <div class="control-group text-inputs-row">
+                    <div class="mini-group">
+                        <label for="collage-man-name">Man's Name</label>
+                        <input type="text" id="collage-man-name" placeholder="Name">
+                    </div>
+                    <div class="mini-group">
+                        <label for="collage-man-age">Age</label>
+                        <input type="number" id="collage-man-age" placeholder="Age">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="collage-man-photo">Man's Photo Link (URL)</label>
+                    <input type="text" id="collage-man-photo" placeholder="Image URL...">
+                </div>
+
+                <div class="control-group text-inputs-row">
+                    <div class="mini-group">
+                        <label for="collage-woman-name">Woman's Name</label>
+                        <input type="text" id="collage-woman-name" placeholder="Name">
+                    </div>
+                    <div class="mini-group">
+                        <label for="collage-woman-age">Age</label>
+                        <input type="number" id="collage-woman-age" placeholder="Age">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="collage-woman-photo">Woman's Photo Link (URL)</label>
+                    <input type="text" id="collage-woman-photo" placeholder="Image URL...">
+                </div>
+
+                <!-- Hidden inputs for file uploads -->
+                <input type="file" id="file-man-photo" accept="image/*" style="display: none;">
+                <input type="file" id="file-woman-photo" accept="image/*" style="display: none;">
+
+                <div class="actions-row">
+                    <button id="btn-export-collage" class="action-btn-primary">
+                        ✨ Save / Print Collage
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Main Collage Canvas -->
+            <div class="collage-canvas-container">
+                <div class="collage-card" id="collage-render-card">
+                    <!-- Dynamic glow ring -->
+                    <div class="collage-glow-ring"></div>
+                    <div class="collage-particles" id="collage-particles-container"></div>
+                    
+
+                    
+                    <div class="collage-hearts-row">
+                        <!-- Left Heart: Man -->
+                        <div class="heart-frame-wrapper" id="wrapper-man-collage">
+                            <div class="heart-frame" id="frame-man-collage" title="Click to upload Man's Photo">
+                                <div class="heart-placeholder">
+                                    <span class="upload-icon">📷</span>
+                                    <span class="upload-text">Man's Photo</span>
+                                </div>
+                                <img id="display-img-man" src="" alt="Man's Connection" class="heart-img" style="display: none;">
+                            </div>
+                            <div class="heart-caption">
+                                <span id="display-name-man" class="heart-name">Man</span>
+                                <span id="display-age-man" class="heart-age">Age 0</span>
+                            </div>
+                        </div>
+
+                        <!-- Center Link: Badge -->
+                        <div class="collage-divider">
+                            <div class="central-glow-heart">
+                                <span class="heart-icon-badge">💖</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Heart: Woman -->
+                        <div class="heart-frame-wrapper" id="wrapper-woman-collage">
+                            <div class="heart-frame" id="frame-woman-collage" title="Click to upload Woman's Photo">
+                                <div class="heart-placeholder">
+                                    <span class="upload-icon">📷</span>
+                                    <span class="upload-text">Woman's Photo</span>
+                                </div>
+                                <img id="display-img-woman" src="" alt="Woman's Connection" class="heart-img" style="display: none;">
+                            </div>
+                            <div class="heart-caption">
+                                <span id="display-name-woman" class="heart-name">Woman</span>
+                                <span id="display-age-woman" class="heart-age">Age 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
