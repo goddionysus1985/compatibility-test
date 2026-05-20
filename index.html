@@ -36,12 +36,20 @@
                     <input type="number" id="man-age" placeholder="0" value="0">
                 </div>
                 <div class="input-group">
+                    <label for="man-photo">Man's Photo Link</label>
+                    <input type="text" id="man-photo" placeholder="Image URL..." value="">
+                </div>
+                <div class="input-group">
                     <label for="woman-name">Woman's Name</label>
                     <input type="text" id="woman-name" placeholder="e.g. Inna" value="">
                 </div>
                 <div class="input-group">
                     <label for="woman-age">Woman's Age</label>
                     <input type="number" id="woman-age" placeholder="0" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="woman-photo">Woman's Photo Link</label>
+                    <input type="text" id="woman-photo" placeholder="Image URL..." value="">
                 </div>
                 <div class="input-group full-width">
                     <label for="compatibility-pct">Compatibility Percentage</label>
@@ -75,6 +83,7 @@
                             <div class="bar" id="bar-man">
                                 <div class="remaining"></div>
                                 <div class="compatibility">
+                                    <img id="img-man" class="bar-photo" src="" alt="Man's Photo" style="display: none;">
                                     <span id="label-man">Man, 0</span>
                                 </div>
                             </div>
@@ -84,6 +93,7 @@
                             <div class="bar" id="bar-woman">
                                 <div class="remaining"></div>
                                 <div class="compatibility">
+                                    <img id="img-woman" class="bar-photo" src="" alt="Woman's Photo" style="display: none;">
                                     <span id="label-woman">Woman, 0</span>
                                 </div>
                             </div>

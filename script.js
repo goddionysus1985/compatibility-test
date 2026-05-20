@@ -2,12 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inputs
     const manNameInput = document.getElementById('man-name');
     const manAgeInput = document.getElementById('man-age');
+    const manPhotoInput = document.getElementById('man-photo');
     const womanNameInput = document.getElementById('woman-name');
     const womanAgeInput = document.getElementById('woman-age');
+    const womanPhotoInput = document.getElementById('woman-photo');
     const compatibilityInput = document.getElementById('compatibility-pct');
     
     // Displays & Bars
     const pctDisplay = document.getElementById('pct-display');
+    const imgMan = document.getElementById('img-man');
+    const imgWoman = document.getElementById('img-woman');
     const labelMan = document.getElementById('label-man');
     const labelWoman = document.getElementById('label-woman');
     const barManComp = document.querySelector('#bar-man .compatibility');
@@ -49,8 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const percentage = compatibilityInput.value || 0;
         const manName = manNameInput.value || 'Man';
         const manAge = manAgeInput.value || '0';
+        const manPhoto = manPhotoInput.value.trim();
         const womanName = womanNameInput.value || 'Woman';
         const womanAge = womanAgeInput.value || '0';
+        const womanPhoto = womanPhotoInput.value.trim();
 
         // Calculate dynamic color based on theme
         let hueEnd = 120; // Emerald (Midnight)
@@ -76,6 +82,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (labelMan) labelMan.textContent = `${manName}, ${manAge}`;
         if (labelWoman) labelWoman.textContent = `${womanName}, ${womanAge}`;
         
+        if (imgMan) {
+            if (manPhoto) {
+                imgMan.src = manPhoto;
+                imgMan.style.display = 'block';
+            } else {
+                imgMan.style.display = 'none';
+                imgMan.src = '';
+            }
+        }
+        
+        if (imgWoman) {
+            if (womanPhoto) {
+                imgWoman.src = womanPhoto;
+                imgWoman.style.display = 'block';
+            } else {
+                imgWoman.style.display = 'none';
+                imgWoman.src = '';
+            }
+        }
+
         // Update Bars
         if (barManComp) {
             barManComp.style.height = `${percentage}%`;
@@ -100,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners
-    [manNameInput, manAgeInput, womanNameInput, womanAgeInput, compatibilityInput].forEach(input => {
+    [manNameInput, manAgeInput, manPhotoInput, womanNameInput, womanAgeInput, womanPhotoInput, compatibilityInput].forEach(input => {
         if (input) input.addEventListener('input', updateBars);
     });
 

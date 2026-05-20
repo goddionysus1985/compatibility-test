@@ -179,13 +179,19 @@ h1 {
 
 .input-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
 @media (max-width: 850px) {
     .input-grid {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .input-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -349,7 +355,20 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: center;
     transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease;
     position: relative;
-    overflow: hidden;
+}
+
+.bar-photo {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 #label-man, #label-woman {
