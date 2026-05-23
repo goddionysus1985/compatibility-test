@@ -50,7 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setTheme(currentTheme);
 
     function updateBars() {
-        const percentage = compatibilityInput.value || 0;
+        let percentage = parseFloat(compatibilityInput.value) || 0;
+        if (percentage < 90) {
+            percentage = Math.round(percentage);
+            compatibilityInput.value = percentage;
+        }
         const manName = manNameInput.value || 'Man';
         const manAge = manAgeInput.value || '0';
         const manPhoto = manPhotoInput.value.trim();
@@ -68,9 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const color = `hsl(${hue}, 80%, 45%)`;
         const colorGlow = `hsl(${hue}, 80%, 45%, 0.4)`;
 
+        const displayPercentage = percentage >= 90 ? percentage.toFixed(1) : percentage;
+
         // Update Text
         if (pctDisplay) {
-            pctDisplay.textContent = `${percentage}%`;
+            pctDisplay.textContent = `${displayPercentage}%`;
             pctDisplay.style.color = color;
             if (percentage > 50) {
                 pctDisplay.style.textShadow = `0 0 20px ${colorGlow}`;
@@ -114,12 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update Indicators
         if (indMan) {
-            indMan.textContent = `${percentage}%`;
+            indMan.textContent = `${displayPercentage}%`;
             indMan.style.bottom = `${percentage}%`;
             indMan.style.background = color;
         }
         if (indWoman) {
-            indWoman.textContent = `${percentage}%`;
+            indWoman.textContent = `${displayPercentage}%`;
             indWoman.style.bottom = `${percentage}%`;
             indWoman.style.background = color;
         }
@@ -377,7 +383,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastLaunchTime = 0;
     if (collageCompatibilityPctInput) {
         collageCompatibilityPctInput.addEventListener('input', () => {
-            const val = collageCompatibilityPctInput.value;
+            let val = parseFloat(collageCompatibilityPctInput.value);
+            if (val < 90) {
+                val = Math.round(val);
+                collageCompatibilityPctInput.value = val;
+            }
             
             // Sync to main form
             if (compatibilityInput) {
